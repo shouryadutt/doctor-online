@@ -8,6 +8,8 @@ pipeline{
         }
         stage("Artifact Uploader"){
             steps{
+                def pom =readMavenPom file: 'pom.xml'
+                def version = pom.version
                nexusArtifactUploader artifacts: [[artifactId: 'doctor-online', 
                classifier: '', file: 'target/doctor-online', type: 'war']], 
                credentialsId: 'nexus3', groupId: 'in.javahome', 
